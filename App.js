@@ -7,6 +7,10 @@ import { purple, white } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import Decks from './components/Decks'
 import Deck from './components/Deck'
+import AddCard from './components/AddCard'
+import { AsyncStorage } from 'react-native'
+const SET_STORAGE_KEY = 'UdaciFlashcards:decks'
+
 
 import { updateFocus } from 'react-navigation-is-focused-hoc'
 
@@ -60,11 +64,27 @@ const MainNavigator = StackNavigator({
         backgroundColor: purple,
       }
     }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
   }
 })
 
 
 export default class App extends React.Component {
+  
+  componentDidMount(){
+      return AsyncStorage.mergeItem(SET_STORAGE_KEY, JSON.stringify({
+        first: {title:"first",questions:[{question:"what is react",answer:"Watch me!"}]}
+      }))
+    }
+
   render() {
     return (
         <View style={{flex: 1}}>

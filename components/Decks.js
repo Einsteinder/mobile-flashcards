@@ -3,13 +3,15 @@ import { Text, View, Platform, StyleSheet, ScrollView, TouchableOpacity } from '
 import { fetchDecks } from '../utils/api'
 import { purple, white } from '../utils/colors'
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
-import { List, ListItem } from 'react-native-elements'
+import { List, ListItem, Card, Button } from 'react-native-elements'
+
 
 
 
 class Decks extends Component {
     state = {
-        decks: { "sdffd": "asdfasdf" }
+        decks: { Initial: {title:"Initial",questions:[{question:"what is react",answer:"Watch me!"}]}
+    }
     }
 
     async componentDidMount() {
@@ -31,19 +33,21 @@ class Decks extends Component {
     render() {
         return (
             <ScrollView>
-
-
-
-                <List>
+                <List >
                     {
-                        Object.keys(this.state.decks).map((deck) => (
-                            <TouchableOpacity onPress={() => this.props.navigation.navigate(
-                                'Deck',
+                        Object.entries(this.state.decks).map((deck) => (
+
+
+                            <TouchableOpacity key={deck[0]} onPress={() => this.props.navigation.navigate(
+                                'Deck',{
+                                    deckName:deck[0],
+                                    deckContent:deck[1]
+                                }
                             )}>
                                 <ListItem
-                                    key={deck}
+                                    key={deck[0]}
                                     title={<View style={styles.subtitleView}>
-                                        <Text style={styles.ratingText}>{deck}</Text>
+                                        <Text style={styles.ratingText}>{deck[0]}</Text>
                                     </View>}
                                     subtitle={
                                         <View style={styles.subtitleView}>

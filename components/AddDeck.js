@@ -21,7 +21,9 @@ class AddDeck extends Component {
     if(!key){
       return false
     }
-    const entry = {}
+    const entry = {title:key,
+      questions:[]
+    }
 
     const decks = await fetchDecks()
     if(decks[key]){
