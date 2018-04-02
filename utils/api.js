@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native'
 export const SET_STORAGE_KEY = 'UdaciFlashcards:decks'
 
 
-export async function submitEntry ({ entry, key }) {
+export async function submitEntry ({  key,entry }) {
 
     return await AsyncStorage.mergeItem(SET_STORAGE_KEY, JSON.stringify({
       [key]: entry

@@ -28,17 +28,21 @@ class AddCard extends Component {
 
     const decks = await fetchDecks()
     const newQuestions =[]
-    for(let i = 0 ;i<decks[deckName].questions.length;i++){
-      newQuestions.push(decks[deckName].questions[i])
+    if(decks[deckName].questions.length>0){
+      for(let i = 0 ;i<decks[deckName].questions.length;i++){
+        newQuestions.push(decks[deckName].questions[i])
+      }
     }
+
     newQuestions.push({question:question,
       answer:answer
   })
     const updatedDeck = Object.assign({},{...decks[deckName],questions:newQuestions})
+    console.log(updatedDeck)
     const updatedDecks = Object.assign({},{...decks,deckName:updatedDeck})
 
 
-    submitEntry({ deckName, updatedDecks  })
+    submitEntry({ key:deckName, entry:updatedDeck  })
     this.setState({question:"",answer:""})
 
     this.toHome()
