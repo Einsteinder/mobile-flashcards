@@ -10,18 +10,21 @@ import { List, ListItem, Card, Button } from 'react-native-elements'
 
 class Decks extends Component {
     state = {
-        decks: { Initial: {title:"Initial",questions:[{question:"what is react",answer:"Watch me!"}]}
+        decks: { Initial: {title:"Initial",questions:[{question:"what is react",answer:"Watch me!"}
+    ]}
     }
     }
 
     async componentDidMount() {
+        
         const decks = await fetchDecks()
+    
         this.setState({ decks: decks })
-
+    
 
     }
 
-    async componentWillReceiveProps(nextProps) {
+    async UNSAFE_componentWillReceiveProps(nextProps) {
         if (!this.props.isFocused && nextProps.isFocused) {
             const decks = await fetchDecks()
             this.setState({ decks: decks })

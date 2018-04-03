@@ -7,6 +7,8 @@ import { purple, white } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import Decks from './components/Decks'
 import Deck from './components/Deck'
+import Quiz from './components/Quiz'
+
 import AddCard from './components/AddCard'
 import { AsyncStorage } from 'react-native'
 const SET_STORAGE_KEY = 'UdaciFlashcards:decks'
@@ -73,15 +75,32 @@ const MainNavigator = StackNavigator({
         backgroundColor: purple,
       }
     }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+      }
+    }
   }
 })
 
 
 export default class App extends React.Component {
   
-  componentDidMount(){
-      return AsyncStorage.mergeItem(SET_STORAGE_KEY, JSON.stringify({
-        first: {title:"first",questions:[{question:"what is react",answer:"Watch me!"}]}
+  async UNSAFE_componentWillMount(){
+      return await AsyncStorage.mergeItem(SET_STORAGE_KEY, JSON.stringify({
+        Initial: {title:"Initial",questions:[{question:"what is react",answer:"Watch me!"}
+        ,{question:"what is react native",answer:"Watch me!"}
+        ,{question:"what is iphone",answer:"Watch me!"}
+        ,{question:"who are you",answer:"Watch me!"}
+        ,{question:"wehre are you",answer:"Watch me!"}
+        ,{question:"where am I",answer:"Who knows"}
+        ,{question:"who am I",answer:"Nobody cares"}
+    ]}
+    
       }))
     }
 

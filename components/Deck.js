@@ -10,12 +10,6 @@ class Deck extends Component {
     render() {
         const { deckName, deckContent } = this.props.navigation.state.params
 
-        const users = [
-            {
-                name: 'brynn',
-                avatar: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg'
-            },
-        ]
 
         return (
 
@@ -26,7 +20,7 @@ class Deck extends Component {
                 <Card
                     title={deckName}>
                     <Text style={{ marginBottom: 10 }}>
-                        The {this.deckContent}idea with React Native Elements is more about component structure than actual design.
+                        Start quiz or add cards.
      </Text>
 
             
@@ -34,7 +28,11 @@ class Deck extends Component {
                             icon={{ name: 'assignment' }}
                             backgroundColor='#03A9F4'
                             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
-                            title='Start Quiz' />
+                            title='Start Quiz'
+                            onPress={() => this.props.navigation.navigate(
+                        'Quiz', {
+                            deckContent:deckContent
+                        })} />
                    
                         <Button
                             icon={{ name: 'add' }}
