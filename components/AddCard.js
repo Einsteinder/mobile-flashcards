@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {  Text, TextInput, View,StyleSheet,Alert,TouchableOpacity } from 'react-native';
 import TextButton from './TextButton'
-import {timeToString } from '../utils/helpers'
 import { submitEntry ,fetchDecks} from '../utils/api'
 import { purple, white } from '../utils/colors'
 import { NavigationActions } from 'react-navigation'
@@ -45,12 +44,9 @@ class AddCard extends Component {
     submitEntry({ key:deckName, entry:updatedDeck  })
     this.setState({question:"",answer:""})
 
-    this.toHome()
   }
 
-  toHome = () => {
-    this.props.navigation.dispatch(NavigationActions.back({key: 'AddDeck'}))
-  }
+
   render() {
     return (
       <View style={styles.center}>

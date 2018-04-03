@@ -3,18 +3,45 @@ import { View, Text, Image,TouchableOpacity,Alert} from 'react-native'
 import { Card, ListItem, Button } from 'react-native-elements'
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 import { List } from 'react-native-elements'
+import { fetchDecks } from '../utils/api'
 
 class Deck extends Component {
+    state={
+        decks:{},
+        deckName:"", 
+        deckContent:{},
+        decksLength:0
+    }
+    async componentDidMount() {
+        
+        const decks = await fetchDecks()
+        const { deckName } = await this.props.navigation.state.params
 
+        this.setState({ decks: decks,deckName:deckName,deckContent:decks[deckName],decksLength:decks[deckName].questions.length })
+    
 
-    render() {   
-        const { deckName, deckContent } = this.props.navigation.state.params
+    }
+
+    async componentWillReceiveProps(nextProps) {
+        if (!this.props.isFocused && nextProps.isFocused) {
+            const decks = await fetchDecks()
+            const { deckName } = await this.props.navigation.state.params
+    
+            this.setState({ decks: decks,deckName:deckName,deckContent:decks[deckName],decksLength:decks[deckName].questions.length })
+        
+          // screen enter (refresh data, update ui ...)
+        }
+
+      }
+    render() {  
+ 
+
         startQuiz =()=>{
-            deckContent.questions.length===0?     Alert.alert(
+            this.state.decksLength===0?     Alert.alert(
                 "Please add cards first"
              ):this.props.navigation.navigate(
                 'Quiz', {
-                    deckContent:deckContent
+                    deckContent:this.state.deckContent
                 })
         }
 
@@ -25,9 +52,9 @@ class Deck extends Component {
             // implemented with Text and Button as children
             <List>
                 <Card
-                    title={deckName}>
+                    title={this.state.deckName}>
                     <Text style={{ marginBottom: 10 }}>
-                        Here is {deckContent.questions.length} cards totally. Start quiz or add cards.
+                        Here is {this.state.decksLength} cards totally. Start quiz or add cards.
      </Text>
 
             
@@ -45,7 +72,7 @@ class Deck extends Component {
                             title='Add Card' 
                             onPress={()=>this.props.navigation.navigate(
             'AddCard', {
-                deckName:deckName
+                deckName:this.state.deckName
             }) }/>
   
    </Card>

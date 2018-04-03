@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {  Text, TextInput, View,StyleSheet,Alert } from 'react-native';
 import TextButton from './TextButton'
-import {timeToString } from '../utils/helpers'
 import { submitEntry ,fetchDecks} from '../utils/api'
 import { purple, white } from '../utils/colors'
 import { NavigationActions } from 'react-navigation'
