@@ -38,8 +38,8 @@ class AddCard extends Component {
       answer:answer
   })
     const updatedDeck = Object.assign({},{...decks[deckName],questions:newQuestions})
-    console.log(updatedDeck)
-    const updatedDecks = Object.assign({},{...decks,deckName:updatedDeck})
+
+   
 
 
     submitEntry({ key:deckName, entry:updatedDeck  })

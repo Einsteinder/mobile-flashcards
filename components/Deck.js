@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image,TouchableOpacity } from 'react-native'
+import { View, Text, Image,TouchableOpacity,Alert} from 'react-native'
 import { Card, ListItem, Button } from 'react-native-elements'
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 import { List } from 'react-native-elements'
@@ -7,9 +7,16 @@ import { List } from 'react-native-elements'
 class Deck extends Component {
 
 
-    render() {
+    render() {   
         const { deckName, deckContent } = this.props.navigation.state.params
-
+        startQuiz =()=>{
+            deckContent.questions.length===0?     Alert.alert(
+                "Please add cards first"
+             ):this.props.navigation.navigate(
+                'Quiz', {
+                    deckContent:deckContent
+                })
+        }
 
         return (
 
@@ -20,7 +27,7 @@ class Deck extends Component {
                 <Card
                     title={deckName}>
                     <Text style={{ marginBottom: 10 }}>
-                        Start quiz or add cards.
+                        Here is {deckContent.questions.length} cards totally. Start quiz or add cards.
      </Text>
 
             
@@ -29,20 +36,17 @@ class Deck extends Component {
                             backgroundColor='#03A9F4'
                             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
                             title='Start Quiz'
-                            onPress={() => this.props.navigation.navigate(
-                        'Quiz', {
-                            deckContent:deckContent
-                        })} />
+                            onPress={startQuiz } />
                    
                         <Button
                             icon={{ name: 'add' }}
                             backgroundColor='#0324a3'
                             buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
                             title='Add Card' 
-                            onPress={() => this.props.navigation.navigate(
-                        'AddCard', {
-                            deckName:deckName
-                        })}/>
+                            onPress={()=>this.props.navigation.navigate(
+            'AddCard', {
+                deckName:deckName
+            }) }/>
   
    </Card>
 
