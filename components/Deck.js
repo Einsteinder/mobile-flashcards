@@ -4,6 +4,7 @@ import { Card, ListItem, Button } from 'react-native-elements'
 import { withNavigationFocus } from 'react-navigation-is-focused-hoc'
 import { List } from 'react-native-elements'
 import { fetchDecks } from '../utils/api'
+import { clearLocalNotification, setLocalNotification} from '../utils/notificationRelated'
 
 class Deck extends Component {
     state={
@@ -37,6 +38,9 @@ class Deck extends Component {
  
 
         startQuiz =()=>{
+            clearLocalNotification()
+            .then(setLocalNotification)
+        
             this.state.decksLength===0?     Alert.alert(
                 "Please add cards first"
              ):this.props.navigation.navigate(

@@ -18,6 +18,9 @@ import { updateFocus } from 'react-navigation-is-focused-hoc'
 
 import './ReactotronConfig'
 
+import { setLocalNotification } from './utils/notificationRelated'
+
+
 const Tabs = TabNavigator({
   Decks: {
     screen: Decks,
@@ -90,6 +93,10 @@ const MainNavigator = StackNavigator({
 
 export default class App extends React.Component {
   
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   async UNSAFE_componentWillMount(){
       return await AsyncStorage.mergeItem(SET_STORAGE_KEY, JSON.stringify({
         Initial: {title:"Initial",questions:[{question:"what is react",answer:"Watch me!"}

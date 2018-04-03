@@ -54,7 +54,7 @@ class Decks extends Component {
                                     </View>}
                                     subtitle={
                                         <View style={styles.subtitleView}>
-                                            <Text style={styles.ratingText}>Number of words: </Text>
+                                            <Text style={styles.ratingText}>{deck[1].questions.length} Cards</Text>
                                         </View>
                                     }
 
