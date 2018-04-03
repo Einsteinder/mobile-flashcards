@@ -99,11 +99,11 @@ export default class App extends React.Component {
 
   async UNSAFE_componentWillMount(){
       return await AsyncStorage.mergeItem(SET_STORAGE_KEY, JSON.stringify({
-        Initial: {title:"Initial",questions:[{question:"what is react",answer:"Watch me!"}
-        ,{question:"what is react native",answer:"Watch me!"}
-        ,{question:"what is iphone",answer:"Watch me!"}
-        ,{question:"who are you",answer:"Watch me!"}
-        ,{question:"wehre are you",answer:"Watch me!"}
+        Initial: {title:"Initial",questions:[{question:"what is react",answer:"Watch me 1 time!"}
+        ,{question:"what is react native",answer:"Watch me 2 times!"}
+        ,{question:"what is iphone",answer:"Watch me 3 times!"}
+        ,{question:"who are you",answer:"Watch me 4 times!"}
+        ,{question:"wehre are you",answer:"Watch me 5 times!"}
         ,{question:"where am I",answer:"Who knows"}
         ,{question:"who am I",answer:"Nobody cares"}
     ]}
